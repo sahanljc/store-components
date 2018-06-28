@@ -8,8 +8,6 @@ import AutocompleteInput from './components/AutocompleteInput'
 
 import { NoSSR } from 'render'
 
-import './global.css'
-
 /** Canonical search bar that uses the autocomplete endpoint to search for a specific product*/
 class SearchBar extends Component {
   static contextTypes = {
@@ -32,6 +30,7 @@ class SearchBar extends Component {
     const placeholder = this.context.intl.formatMessage({ id: 'search.placeholder' })
     const emptyPlaceholder = this.context.intl.formatMessage({ id: 'search.noMatches' })
     const fallback = (<AutocompleteInput placeholder={placeholder} />)
+
 
     return (
       <div className="vtex-searchbar">

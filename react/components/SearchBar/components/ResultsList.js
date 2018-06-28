@@ -6,10 +6,14 @@ import autocomplete from '../queries/autocomplete.gql'
 import { Spinner } from 'vtex.styleguide'
 import { Link } from 'render'
 
-const listClassNames =
-  'vtex-results__list z-max absolute w-100 mt3 border-box bw1 br2 b--solid outline-0 near-black b--light-gray bg-white f5 pv4 ph6'
-const listItemClassNames =
-  'vtex-results__item dim pointer flex justify-start mt1 pa1 near-black f5 pv4 ph6'
+import styles from '../../../customStyles.css'
+// import styles from './customStyles.css'
+
+const listClassNames = (styles) =>
+  `${styles.list} z-max absolute w-100 mt3 border-box bw1 br2 b--solid outline-0 near-black b--light-gray bg-white f5 pv4 ph6`
+
+const listItemClassNames = (styles) =>
+  `${styles.item} dim pointer flex justify-start mt1 pa1 near-black f5 pv4 ph6`
 
 function getImageUrl(image) {
   return (image.match(/http:(.*?)"/g) || [''])[0]
@@ -41,11 +45,12 @@ class ResultsList extends Component {
   }
 
   render() {
+    console.log('>>>>>>>>>>>>> STYLES STYLES STYLES STYLES STYLES STYLES ', styles)
     const { data, emptyPlaceholder, inputValue } = this.props
     const items = data.autocomplete ? data.autocomplete.itemsReturned : []
     if (data.loading) {
       return (
-        <ol className={listClassNames}>
+        <ol className={listClassNames(styles)}>
           {this.renderSpinner()}
         </ol>
       )
@@ -53,35 +58,36 @@ class ResultsList extends Component {
 
     if (!items.length) {
       return (
-        <ol className={listClassNames}>
-          <li className={listItemClassNames}>{emptyPlaceholder}</li>
+        <ol className={listClassNames(styles)}>
+          <li className={listItemClassNames(styles)}>{emptyPlaceholder}</li>
         </ol>
       )
     }
 
     return (
-      <ol className={listClassNames}>
+      <ol className={listClassNames(styles)}>
+        Resultados!!!!!!
         <Link
           onClick={() => { this.props.closeMenu() }}
           page="store/search"
           params={{ term: inputValue }}
           query="map=ft"
           className="clear-link dim">
-          <li className={`${listItemClassNames}`}>
+          <li className={`${listItemClassNames(styles)}`}>
             {inputValue}
           </li>
         </Link>
         {items.map((item, index) => {
           return (
-            <Link 
+            <Link
               onClick={() => { this.props.closeMenu() }}
-              key={item.name + index} 
-              {...this.getLinkProps(item)} 
+              key={item.name + index}
+              {...this.getLinkProps(item)}
               className="clear-link dim">
-              <li className={listItemClassNames}>
+              <li className={listItemClassNames(styles)}>
                 {item.thumb && (
                   <div className="mr4">
-                    <img className="vtex-results__item-image" src={getImageUrl(item.thumb)} />
+                    <img className={styles['item-image']} src={getImageUrl(item.thumb)} />
                   </div>
                 )}
                 <div className="flex justify-start items-center">{item.name}</div>
