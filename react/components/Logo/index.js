@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import DefaultLogo from './images/DefaultLogo.svg'
 
-import './global.css'
+import logoStyles from './logoStyles.css'
 
 /**
  * Logo of the store
@@ -19,9 +19,9 @@ export default class Logo extends Component {
   static defaultProps = {
     title: 'VTEX logo',
   }
-  
+
   render() {
     const { url, title } = this.props
-    return <img className="vtex-logo" src={url || DefaultLogo} alt={title} />
+    return <img className={logoStyles['vtex-logo']} src={url || DefaultLogo} alt={title} />
   }
 }

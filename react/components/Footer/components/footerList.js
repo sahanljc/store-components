@@ -7,6 +7,8 @@ function getDisplayName(Component) {
   return Component.displayName || Component.name || 'Component'
 }
 
+import footerStyles from '../footerStyles.css'
+
 export default function footerList(WrappedComponent) {
   class FooterList extends Component {
     static displayName = `FooterList(${getDisplayName(WrappedComponent)})`
@@ -33,22 +35,22 @@ export default function footerList(WrappedComponent) {
 
       if (!list || list.length === 0) return null
 
-      const listContainerClasses = classNames('vtex-footer__list-container', {
-        'vtex-footer__list-container--right-aligned': alignRight,
-        'vtex-footer__list-container--horizontal': horizontal,
+      const listContainerClasses = classNames(`${footerStyles['list-container']}`, {
+        [`${footerStyles['list-container--right-aligned']}`]: alignRight,
+        [`${footerStyles['list-container--horizontal']}`]: horizontal,
       })
 
-      const listClasses = classNames('vtex-footer__list', {
-        'vtex-footer__list--horizontal': horizontal,
+      const listClasses = classNames(`${footerStyles.list}`, {
+        [`${footerStyles['list--horizontal']}`]: horizontal,
       })
 
-      const listItemClasses = classNames('vtex-footer__list-item', {
-        'vtex-footer__list-item--horizontal': horizontal,
+      const listItemClasses = classNames(`${footerStyles['list-item']}`, {
+        [footerStyles['list-item--horizontal']]: horizontal,
       })
 
       return (
         <div className={listContainerClasses}>
-          {titleId && <h4 className="vtex-footer__list-title">
+          {titleId && <h4 className={footerStyles['list-title']}>
             {this.formatMessage(titleId)}
           </h4>}
           <ul className={listClasses}>

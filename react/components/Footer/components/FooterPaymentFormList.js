@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import footerList from './footerList'
 
+import footerStyles from '../footerStyles.css'
+
 class FooterPaymentFormItem extends Component {
   state = {}
 
@@ -21,7 +23,7 @@ class FooterPaymentFormItem extends Component {
       return null
     }
 
-    return <img className="vtex-footer__payment-form-item" src={image} />
+    return <img className={footerStyles['payment-form-item']} src={image} />
   }
 }
 

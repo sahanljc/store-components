@@ -1,32 +1,32 @@
-.vtex-footer__container {
+.container {
   background-color: #3d3d3d;
   color: #f2f2f2;
   display: flex;
   justify-content: space-between;
 }
 
-.vtex-footer__container--white {
+.container--white {
   background-color: #f2f2f2;
   color: #333333;
 }
 
-.vtex-footer__badge-list {
+.badge-list {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.vtex-footer__list-container {
+.list-container {
   padding: 0 0.35rem;
   height: 100%;
 }
 
-.vtex-footer__list-title {
+.list-title {
   margin: 0;
   text-transform: uppercase;
 }
 
-.vtex-footer__list {
+.list {
   display: flex;
   flex-flow: column wrap;
   list-style: none;
@@ -35,149 +35,149 @@
   margin-bottom: 0;
 }
 
-.vtex-footer__list--horizontal {
+.list--horizontal {
   flex-flow: row wrap;
 }
 
-.vtex-footer__list-item {
+.list-item {
   width: 100%;
 }
 
-.vtex-footer__list-item--horizontal {
+.list-item--horizontal {
   width: auto;
 }
 
-.vtex-footer__payment-form-item {
+.payment-form-item {
   height: 64px;
   width: 64px;
 }
-.vtex-footer__vtexlogo-form-item {
+.vtexlogo-form-item {
   height: 64px;
   width: 64px;
 }
 
-.vtex-footer__social-network-item {
+.social-network-item {
   height: 32px;
   width: 32px;
 }
 
-.vtex-footer__list-link {
+.list-link {
   display: inline-block;
   text-decoration: none;
   margin: 0.15rem 0;
   color: rgba(255, 255, 255, 0.8);
 }
 
-.vtex-footer__list-link:hover {
+.list-link:hover {
   text-decoration: underline;
 }
 
-.vtex-footer__logo-image {
+.logo-image {
   height: 64px;
 }
 
 @media screen and (min-width: 10em) {
-  .vtex-footer__container {
+  .container {
     flex-direction: column;
     padding: 22px 10px;
   }
 
-  .vtex-footer__list-container {
+  .list-container {
     width: 100%;
     margin-top: 10px;
   }
 
-  .vtex-footer__list-container:first-child {
+  .list-container:first-child {
     margin-top: 0;
   }
 
-  .vtex-footer__list-container--right-aligned {
+  .list-container--right-aligned {
     margin-left: 0;
   }
 
-  .vtex-footer__list--horizontal {
+  .list--horizontal {
     flex-flow: row wrap;
   }
 
-  .vtex-footer__list-item {
+  .list-item {
     margin-right: 0;
   }
 
-  .vtex-footer__list-item--horizontal {
+  .list-item--horizontal {
     margin-right: 10px;
   }
 
-  .vtex-footer__badge {
+  .badge {
     padding: 0.35rem;
   }
 }
 
 @media screen and (min-width: 40em) {
-  .vtex-footer__container {
+  .container {
     flex-flow: row wrap;
     padding: 20px;
   }
 
-  .vtex-footer__list {
+  .list {
     max-height: 150px;
   }
 
-  .vtex-footer__list-container {
+  .list-container {
     margin-top: 0;
     width: 225px;
   }
 
-  .vtex-footer__list-container--horizontal {
+  .list-container--horizontal {
     width: auto;
   }
 
-  .vtex-footer__list-container--right-aligned {
+  .list-container--right-aligned {
     margin-left: auto;
   }
 
-  .vtex-footer__list--horizontal {
+  .list--horizontal {
     flex-flow: row wrap;
   }
 }
 
 @media screen and (min-width: 64em) {
-  .vtex-footer__container {
+  .container {
     padding: 20px 70px 20px;
   }
 
-  .vtex-footer__container:first-of-type {
+  .container:first-of-type {
     padding-top: 25px;
   }
 
-  .vtex-footer__container:last-of-type {
+  .container:last-of-type {
     padding-bottom: 25px;
   }
 
-  .vtex-footer__list-item {
+  .list-item {
     margin-right: 100px;
   }
 
-  .vtex-footer__list-item--horizontal {
+  .list-item--horizontal {
     margin-right: 15px;
   }
 }
 
 @media screen and (min-width: 80em) {
-  .vtex-footer__container {
+  .container {
     padding-left: 140px;
     padding-right: 140px;
   }
 }
 
 @media screen and (min-width: 100em) {
-  .vtex-footer__container {
+  .container {
     padding-left: 250px;
     padding-right: 250px;
   }
 }
 
 @media screen and (min-width: 120em) {
-  .vtex-footer__container {
+  .container {
     padding-left: 320px;
     padding-right: 320px;
   }

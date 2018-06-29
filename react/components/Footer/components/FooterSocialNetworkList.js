@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import footerList from './footerList'
 
+import footerStyles from '../footerStyles.css'
+
 class FooterSocialNetworkItem extends Component {
   state = {}
 
@@ -24,7 +26,7 @@ class FooterSocialNetworkItem extends Component {
 
     return (
       <a href={this.props.url} target="_blank">
-        <img className="vtex-footer__social-network-item" src={image} />
+        <img className={footerStyles['social-network-item']} src={image} />
       </a>
     )
   }

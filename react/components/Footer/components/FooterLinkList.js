@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 
 import footerList from './footerList'
 
+import footerStyles from '../footerStyles.css'
+
 const FooterLinkItem = ({ url, title }) => (
-  <a className="vtex-footer__list-link" href={url}>
+  <a className={footerStyles['list-link']} href={url}>
     {title}
   </a>
 )

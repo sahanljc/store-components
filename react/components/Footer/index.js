@@ -14,7 +14,7 @@ import {
 
 import VTEXIcon from './images/VTEX-BW.svg'
 
-import './global.css'
+import footerStyles from './footerStyles.css'
 
 const linkSchema = {
   type: 'object',
@@ -265,9 +265,11 @@ export default class Footer extends Component {
     const paymentForms = values(this.props.paymentForms)
     const badges = values(this.props.badges)
 
+    const footerPaymentStyles = `${footerStyles.container} ${footerStyles['container--white']}`
+    const footerBadgeListStyles = `${footerStyles['badge-list']} ${footerStyles['list-container--right-aligned']}`
     return (
       <footer className="vtex-footer">
-        <div className="vtex-footer__container">
+        <div className={footerStyles.container}>
           <FooterLinkList titleId="section-links" list={sectionLinks} />
           <FooterSocialNetworkList
             titleId="social-networks"
@@ -277,7 +279,7 @@ export default class Footer extends Component {
             showInColor={showSocialNetworksInColor}
           />
         </div>
-        <div className="vtex-footer__container vtex-footer__container--white">
+        <div className={footerPaymentStyles}>
           <FooterPaymentFormList
             titleId="payment-form"
             list={paymentForms}
@@ -285,11 +287,11 @@ export default class Footer extends Component {
             showInColor={showPaymentFormsInColor}
           />
         </div>
-        <div className="vtex-footer__container">
+        <div className={footerStyles.container}>
           <FooterBadgeList list={badges} />
-          <div className="vtex-footer__badge-list vtex-footer__list-container--right-aligned">
-            <span className="vtex-footer__badge"><img className="vtex-footer__logo-image" src={logo} /></span>
-            <span className="vtex-footer__badge"><img className="vtex-footer__vtexlogo-form-item" src={VTEXIcon} /></span>
+          <div className={footerBadgeListStyles}>
+            <span className={footerStyles.badge}><img className={footerStyles['logo-image']} src={logo} /></span>
+            <span className={footerStyles.badge}><img className={footerStyles['vtexlogo-form-item']} src={VTEXIcon} /></span>
           </div>
         </div>
       </footer>
