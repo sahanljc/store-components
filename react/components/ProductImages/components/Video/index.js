@@ -7,6 +7,10 @@ class Video extends Component {
     if (url.search('vimeo') !== -1) { return Vimeo.getThumbUrl(url, thumbWidth) }
   }
 
+  static slideIsVideo(url) {
+    return url.search('vimeo') !== -1 ? true : url.search('youtube') !== -1 ? true : false;
+  }
+
   render() {
     const { url } = this.props
 

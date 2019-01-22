@@ -34,7 +34,7 @@ class ProductImages extends Component {
 
     return images.map(image => { 
       let slide
-      if (image.imageUrls[0].search('vimeo') === -1){
+      if (Video.slideIsVideo(image.imageUrls[0])){
         slide = {
           type: 'image',
           urls: image.imageUrls,
