@@ -32,15 +32,26 @@ class ProductImages extends Component {
 
     if (images.length === 0) return
 
-    return images.map(image => {
-      return {
-        type: 'image',
-        urls: image.imageUrls,
-        alt: image.imageText,
-        thumbUrl: image.thumbnailUrl || image.imageUrls[0],
-        bestUrlIndex: this.getBestUrlIndex(image.thresholds),
+    return images.map(image => { 
+      let slide
+      if (image.imageUrls[0].search('vimeo') === -1){
+        slide = {
+          type: 'image',
+          urls: image.imageUrls,
+          alt: image.imageText,
+          thumbUrl: image.thumbnailUrl || image.imageUrls[0],
+          bestUrlIndex: this.getBestUrlIndex(image.thresholds),
+        }
+      } else {
+        slide = {
+          type: 'video', 
+          url: image.imageUrls[0],
+          tumbWidth: image.threshold, 
+        }
       }
+      return slide
     })
+
   }
 
   render() {
