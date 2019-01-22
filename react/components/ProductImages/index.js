@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { path } from 'ramda'
 import debounce from 'debounce'
+import Video from './components/Video'
 
 import Carousel from './components/Carousel'
 
@@ -34,7 +35,7 @@ class ProductImages extends Component {
 
     return images.map(image => { 
       let slide
-      if (Video.slideIsVideo(image.imageUrls[0])){
+      if (!Video.slideIsVideo(image.imageUrls[0])){
         slide = {
           type: 'image',
           urls: image.imageUrls,
