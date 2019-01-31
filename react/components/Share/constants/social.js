@@ -1,19 +1,29 @@
 export const SOCIAL_TO_ENUM = {
   facebook: 'Facebook',
-  whatsapp: 'WhatsApp',
+  instagram: 'Instagram',
   twitter: 'Twitter',
-  telegram: 'Telegram',
-  googleplus: 'Google+',
-  email: 'E-mail',
+  whatsapp: 'WhatsApp'
 }
 
 export const SOCIAL_ENUM = Object.values(SOCIAL_TO_ENUM)
 
+export const SOCIAL_COLORS = {
+  [SOCIAL_TO_ENUM.facebook]: '#3B5998',
+  [SOCIAL_TO_ENUM.instagram]: '#3F729B',
+  [SOCIAL_TO_ENUM.twitter]: '#00ACED',
+  [SOCIAL_TO_ENUM.whatsapp]: '#25D366',
+};
+
+export const SOCIAL_ENUM_TO_ID = {
+  [SOCIAL_TO_ENUM.facebook]: 'facebook',
+  [SOCIAL_TO_ENUM.instagram]: 'instagram',
+  [SOCIAL_TO_ENUM.twitter]: 'twitter',
+  [SOCIAL_TO_ENUM.whatsapp]: 'whatsapp',
+}
+
 export const SOCIAL_ENUM_TO_COMPONENT = {
   [SOCIAL_TO_ENUM.facebook]: 'Facebook',
+  [SOCIAL_TO_ENUM.instagram]: 'Instagram',
   [SOCIAL_TO_ENUM.twitter]: 'Twitter',
-  [SOCIAL_TO_ENUM.telegram]: 'Telegram',
-  [SOCIAL_TO_ENUM.googleplus]: 'GooglePlus',
   [SOCIAL_TO_ENUM.whatsapp]: 'Whatsapp',
-  [SOCIAL_TO_ENUM.email]: 'Email',
 }
