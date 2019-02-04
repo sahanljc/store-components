@@ -56,7 +56,7 @@ class ProductImages extends Component {
     console.log(this.slides)
     return (
       <div className="w-100">
-        <Carousel slides={this.slides} />
+        <Carousel slides={[objAux]} />
       </div>
     )
   }

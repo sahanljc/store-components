@@ -118,6 +118,7 @@ Vimeo.defaultProps = {
   height: null,
   showTitle: false,
   className: '',
+  playing: true
 }
 
 export default Vimeo
