@@ -28,16 +28,15 @@ class Carousel extends Component {
   }
 
   setInitialVariablesState() {
-    const slides = this.props.slides || []
+    let slides = this.props.slides || []
 
     this.isVideo = []
     this.rebuildGalleryOnUpdate = false
     this.thumbLoadCount = 0
-
     slides.forEach((slide, i) => {
       if (slide.type === 'video') {
         this.isVideo[i] = true
-        Video.getThumbUrl(slide.src, slide.thumbWidth).then(this.getThumb)
+        Video.getThumbUrl(slide.thumbUrl, slide.thumbWidth).then(this.getThumb)
       } else this.getThumb(slide.thumbUrl)
     })
   }
@@ -131,9 +130,9 @@ class Carousel extends Component {
       case 'video':
         return (
           <Video
-            url={slide.src}
+            url={slide.thumbUrl}
             setThumb={this.setVideoThumb(i)}
-            playing={i === this.state.activeIndex}
+            playing
             id={i}
           />
         )

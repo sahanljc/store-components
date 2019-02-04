@@ -30,32 +30,30 @@ class ProductImages extends Component {
 
   get slides() {
     const { images } = this.props
-
+    
+    console.log('images', images)
     if (images.length === 0) return
-
     return images.map(image => { 
-      let slide
-      if (!Video.slideIsVideo(image.imageUrls[0])){
-        slide = {
-          type: 'image',
-          urls: image.imageUrls,
-          alt: image.imageText,
-          thumbUrl: image.thumbnailUrl || image.imageUrls[0],
-          bestUrlIndex: this.getBestUrlIndex(image.thresholds),
-        }
-      } else {
-        slide = {
-          type: 'video', 
-          url: image.imageUrls[0],
-          tumbWidth: image.threshold, 
-        }
+      return {
+        type: Video.isVideo(image.imageUrls[0]) ? 'video':'image',
+        urls: image.imageUrls,
+        alt: image.imageText,
+        thumbUrl: image.thumbnailUrl || image.imageUrls[0],
+        bestUrlIndex: this.getBestUrlIndex(image.thresholds),
       }
-      return slide
     })
-
   }
 
   render() {
+    const objAux = {
+      type: 'video',
+      urls: ['https://vimeo.com/71336599'],
+      alt: 'Frame Test',
+      bestUrlIndex: this.getBestUrlIndex([640]),
+      thumbUrl: 'https://vimeo.com/71336599',
+      thumbWidth: 640
+    }
+    console.log(this.slides)
     return (
       <div className="w-100">
         <Carousel slides={this.slides} />
