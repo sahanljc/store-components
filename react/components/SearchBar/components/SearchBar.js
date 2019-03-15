@@ -1,96 +1,93 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import AutocompleteInput from './AutocompleteInput'
-import ResultsLists from './ResultsList'
 import DownshiftComponent from 'downshift'
 import { NoSSR } from 'vtex.render-runtime'
 
+import AutocompleteInput from './AutocompleteInput'
+import ResultsLists from './ResultsList'
+
 import styles from '../styles.css'
 
-export default class SearchBar extends Component {
-  render() {
-    const {
-      placeholder,
-      emptyPlaceholder,
-      onEnterPress,
-      onMakeSearch,
-      onInputChange,
-      onGoToSearchPage,
-      onClearInput,
-      shouldSearch,
-      inputValue,
-      compactMode,
-      hasIconLeft,
-      iconClasses,
-      autoFocus,
-    } = this.props
+const SearchBar = ({
+  placeholder,
+  emptyPlaceholder,
+  onEnterPress,
+  onMakeSearch,
+  onInputChange,
+  onGoToSearchPage,
+  onClearInput,
+  shouldSearch,
+  inputValue,
+  compactMode,
+  hasIconLeft,
+  iconClasses,
+  autoFocus,
+}) => {
+  const fallback = (
+    <AutocompleteInput
+      placeholder={placeholder}
+      onMakeSearch={onMakeSearch}
+      onInputChange={onInputChange}
+      onGoToSearchPage={onGoToSearchPage}
+      inputValue={inputValue}
+      hasIconLeft={hasIconLeft}
+      iconClasses={iconClasses}
+    />
+  )
 
-    const fallback = (
-      <AutocompleteInput
-        placeholder={placeholder}
-        onMakeSearch={onMakeSearch}
-        onInputChange={onInputChange}
-        onGoToSearchPage={onGoToSearchPage}
-        inputValue={inputValue}
-        hasIconLeft={hasIconLeft}
-        iconClasses={iconClasses}
-      />
-    )
+  const mainClasses = classNames(styles.searchBarContainer)
 
-    const mainClasses = classNames(styles.searchBarContainer)
-
-    return (
-      <div className={mainClasses}>
-        <NoSSR onSSR={fallback}>
-          <DownshiftComponent>
-            {({
-              getInputProps,
-              selectedItem,
-              highlightedIndex,
-              isOpen,
-              closeMenu,
-            }) => (
-              <div className="relative-m w-100">
-                <AutocompleteInput
-                  autoFocus={autoFocus}
-                  compactMode={compactMode}
-                  onClearInput={onClearInput}
-                  hasIconLeft={hasIconLeft}
-                  iconClasses={iconClasses}
-                  onGoToSearchPage={() => {
+  return (
+    <div className={mainClasses}>
+      <NoSSR onSSR={fallback}>
+        <DownshiftComponent>
+          {({
+            getInputProps,
+            selectedItem,
+            highlightedIndex,
+            isOpen,
+            closeMenu,
+          }) => (
+            <div className="relative-m w-100">
+              <AutocompleteInput
+                autoFocus={autoFocus}
+                compactMode={compactMode}
+                onClearInput={onClearInput}
+                hasIconLeft={hasIconLeft}
+                iconClasses={iconClasses}
+                onGoToSearchPage={() => {
+                  closeMenu()
+                  onGoToSearchPage()
+                }}
+                {...getInputProps({
+                  placeholder,
+                  value: inputValue,
+                  onChange: onInputChange,
+                  onKeyDown: event => {
                     closeMenu()
-                    onGoToSearchPage()
+                    onEnterPress(event)
+                  },
+                })}
+              />
+              {shouldSearch && isOpen ? (
+                <ResultsLists
+                  {...{
+                    inputValue,
+                    selectedItem,
+                    highlightedIndex,
+                    emptyPlaceholder,
+                    closeMenu,
+                    onClearInput,
                   }}
-                  {...getInputProps({
-                    placeholder,
-                    value: inputValue,
-                    onChange: onInputChange,
-                    onKeyDown: event => {
-                      closeMenu()
-                      onEnterPress(event)
-                    },
-                  })}
                 />
-                {shouldSearch && isOpen ? (
-                  <ResultsLists
-                    {...{
-                      inputValue,
-                      selectedItem,
-                      highlightedIndex,
-                      emptyPlaceholder,
-                      closeMenu,
-                      onClearInput,
-                    }}
-                  />
-                ) : null}
-              </div>
-            )}
-          </DownshiftComponent>
-        </NoSSR>
-      </div>
-    )
-  }
+              ) : null}
+            </div>
+          )}
+        </DownshiftComponent>
+      </NoSSR>
+    </div>
+  )
 }
 
 SearchBar.propTypes = {
@@ -121,3 +118,5 @@ SearchBar.propTypes = {
   /** Identify if the search input should autofocus or not */
   autoFocus: PropTypes.bool,
 }
+
+export default SearchBar

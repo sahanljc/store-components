@@ -1,83 +1,71 @@
-import React, { Component } from 'react'
+import React, { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { path } from 'ramda'
-
 import { Input } from 'vtex.styleguide'
 import { IconClose, IconSearch } from 'vtex.store-icons'
 
 import styles from '../styles.css'
 
 /** Midleware component to adapt the styleguide/Input to be used by the Downshift*/
-class AutocompleteInput extends Component {
-  constructor(props) {
-    super(props)
-    this.inputRef = React.createRef()
+const AutocompleteInput = ({
+  onGoToSearchPage,
+  onClearInput,
+  compactMode,
+  value,
+  hasIconLeft,
+  iconClasses,
+  autoFocus,
+  ...restProps
+}) => {
+  const inputRef = useRef()
+
+  const changeClassInput = () => {
+    inputRef.current.placeholder = ''
+    inputRef.current.classList.add(styles.paddingInput)
   }
 
-  changeClassInput = () => {
-    const { compactMode } = this.props
-    if (compactMode) {
-      this.inputRef.current.placeholder = ''
-      this.inputRef.current.classList.add(styles.paddingInput)
-    }
-  }
+  useEffect(() => {
+    compactMode && changeClassInput()
+    autoFocus && inputRef.current.focus()
+  }, [])
 
-  componentDidMount() {
-    const { autoFocus } = this.props
-    this.changeClassInput()
-    autoFocus && this.inputRef.current.focus()
-  }
+  const suffix = (
+    <span
+      className={`${iconClasses} flex items-center pointer`}
+      onClick={() => value && onClearInput()}
+    >
+      {value ? (
+        <IconClose type="line" size={22} />
+      ) : (
+        !hasIconLeft && <IconSearch />
+      )}
+    </span>
+  )
 
-  render() {
-    const {
-      onGoToSearchPage,
-      onClearInput,
-      compactMode,
-      value,
-      hasIconLeft,
-      iconClasses,
-      ...restProps
-    } = this.props
+  const prefix = (
+    <span className={iconClasses}>
+      <IconSearch />
+    </span>
+  )
 
-    const suffix = (
-      <span
-        className={`${iconClasses} flex items-center pointer`}
-        onClick={() => value && onClearInput()}
-      >
-        {value ? (
-          <IconClose type="line" size={22} />
-        ) : (
-          !hasIconLeft && <IconSearch />
-        )}
-      </span>
-    )
+  const classContainer = classNames('w-100', {
+    [styles.compactMode]: compactMode,
+  })
 
-    const prefix = (
-      <span className={iconClasses}>
-        <IconSearch />
-      </span>
-    )
-
-    const classContainer = classNames('w-100', {
-      [styles.compactMode]: compactMode,
-    })
-
-    return (
-      <div className="flex">
-        <div className={classContainer}>
-          <Input
-            ref={this.inputRef}
-            size="large"
-            value={value}
-            prefix={hasIconLeft && prefix}
-            suffix={suffix}
-            {...restProps}
-          />
-        </div>
+  return (
+    <div className="flex">
+      <div className={classContainer}>
+        <Input
+          ref={inputRef}
+          size="large"
+          value={value}
+          prefix={hasIconLeft && prefix}
+          suffix={suffix}
+          {...restProps}
+        />
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 AutocompleteInput.propTypes = {
