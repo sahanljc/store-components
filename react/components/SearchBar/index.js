@@ -3,23 +3,17 @@ import PropTypes from 'prop-types'
 import SearchBar from './components/SearchBar'
 import { injectIntl, intlShape } from 'react-intl'
 
-const SEARCH_DELAY_TIME = 500
-
 /** Canonical search bar that uses the autocomplete endpoint to search for a specific product*/
 const SearchBarContainer = (
-  { intl, compactMode, hasIconLeft, iconClasses, autoFocus },
+  { intl, compactMode, hasIconLeft, iconClasses, autoFocus, delay },
   { navigate }
 ) => {
   const [shouldSearch, setShouldSearch] = useState(false)
   const [inputValue, setInputValue] = useState('')
 
-  const handleClearSearchResults = () => {
-    setShouldSearch(false)
-  }
-
   const handleClearInput = () => {
     setInputValue('')
-    handleClearSearchResults()
+    setShouldSearch(false)
   }
 
   const handleGoToSearchPage = () => {
@@ -33,28 +27,26 @@ const SearchBarContainer = (
     })
   }
 
-  const handleEnterPress = event => {
-    if (event.key === 'Enter') {
-      handleGoToSearchPage()
-    }
-  }
+  const handleEnterPress = event =>
+    event.key === 'Enter' && handleGoToSearchPage()
 
   const handleMakeSearch = () => {
-    handleClearSearchResults()
+    setShouldSearch(false)
     setTimeout(() => {
       setShouldSearch(true)
-    }, SEARCH_DELAY_TIME)
+    }, delay)
   }
 
   const handleInputChange = event => {
     const value = event.target.value
     setInputValue(value)
-    value.length < 2 ? handleClearSearchResults() : handleMakeSearch()
+    value.length < 2 ? setShouldSearch(false) : handleMakeSearch()
   }
 
   const placeholder = intl.formatMessage({
     id: 'search.placeholder',
   })
+
   const emptyPlaceholder = intl.formatMessage({
     id: 'search.noMatches',
   })
@@ -93,6 +85,12 @@ SearchBarContainer.propTypes = {
   iconClasses: PropTypes.string,
   /** Identify if the search input should autofocus or not */
   autoFocus: PropTypes.bool,
+  /** Delay of re-search (in ms) */
+  delay: PropTypes.number,
+}
+
+SearchBarContainer.defaultProps = {
+  delay: 500,
 }
 
 export default injectIntl(SearchBarContainer)
