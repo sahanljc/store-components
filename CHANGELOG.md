@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Add notification bar.
+
 ## [3.20.4] - 2019-03-26
 
 ### Fixed

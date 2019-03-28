@@ -40,5 +40,8 @@
   },
   "user-address": {
     "component": "UserAddress"
+  },
+  "notification-bar": {
+    "component": "NotificationBar"
   }
 }
